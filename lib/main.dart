@@ -25,13 +25,22 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
           body: Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/images/background.jpg'),
+                fit: BoxFit.cover,
+                opacity: 0.6,
+              )
+            ),
             width: double.infinity,
             child: Column(children: [
               SizedBox(height: 60,),
-              SizedBox(width: 110, height: 84, child: Placeholder(),),
+              const SizedBox(width: 110, height: 84, child: Image(image: AssetImage('assets/dart-logo.png'),),),
               SizedBox(height: 20,),
-              Text('Введите логин в виде 10 цифр номера телефона',
-                style: TextStyle(fontSize: 16, color: Color.fromRGBO(0, 0, 0, 0.6)),),
+              const Text('Введите логин в виде 10 цифр\nномера телефона',
+                style: TextStyle(fontSize: 16, color: Color.fromRGBO(0, 0, 0, 0.6)),
+                textAlign: TextAlign.center,),
+
               SizedBox(height: 20,),
               const SizedBox(width: 224,
                 child: TextField(
