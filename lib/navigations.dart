@@ -1,29 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_first_project/autch.dart';
+import 'package:flutter_first_project/pizza_theme_app.dart';
 import 'package:flutter_first_project/contacts.dart';
-
-class Navigations extends StatefulWidget {
-  const Navigations({Key? key}) : super(key: key);
-
-  @override
-  _NavigationsState createState() => _NavigationsState();
-}
-
-class _NavigationsState extends State<Navigations> {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      // home: const MainScreen(),
-      initialRoute: '/',
-      routes: {
-        '/': (context) => const Autch(),
-        '/contacts': (context) => const Contacts(),
-      },
-    );
-  }
-}
+import 'package:flutter_first_project/themes/global_theme.dart';
 
 final _messengerKey = GlobalKey<ScaffoldMessengerState>();
+
+
+class PizzaAppBar {
+  PreferredSizeWidget appBar(context) => AppBar(
+        title: Text("Пицца"),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/contacts');
+            },
+            child: Text("Контакты",
+              style: Theme.of(context).textTheme.bodyText1,
+            ),
+          ),
+          IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/settings');
+              },
+              icon: Icon(Icons.settings)),
+        ],
+      );
+}
 
 Widget navDrawer(context) => Drawer(
   child: ListView(
@@ -69,10 +71,9 @@ Widget navDrawer(context) => Drawer(
       ),
       ListTile(
         leading: const Icon(Icons.bookmark_border_sharp),
-        title: const Text("Заказы"),
+        title: const Text("Заказы",),
         onTap: () {
-          _messengerKey.currentState!.showSnackBar(
-              const SnackBar(content: Text("Переход в Заказы")));
+          Navigator.pushNamed(context, '/orders');
         },
       ),
       ListTile(
@@ -97,8 +98,7 @@ Widget navDrawer(context) => Drawer(
         leading: const Icon(Icons.settings),
         title: const Text("Настройки"),
         onTap: () {
-          _messengerKey.currentState!.showSnackBar(
-              const SnackBar(content: Text("Переход в Настройки")));
+          Navigator.pushNamed(context, '/settings');
         },
       ),
     ],

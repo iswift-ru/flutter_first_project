@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_first_project/navigations.dart';
-import 'package:flutter_first_project/autch.dart';
+import 'package:flutter_first_project/pizza_theme_app.dart';
+import 'package:flutter_first_project/themes/global_theme.dart';
 
 class Contacts extends StatelessWidget {
   const Contacts({Key? key}) : super(key: key);
@@ -11,16 +12,12 @@ class Contacts extends StatelessWidget {
     final ButtonStyle buttonStyle =
     TextButton.styleFrom(primary: Theme.of(context).colorScheme.onPrimary);
 
+    var pizzaBar = PizzaAppBar();
+
     return MaterialApp(
+      theme: globalTheme(),
       home: Scaffold(
-          appBar: AppBar(
-            title: Text("Контакты"),
-            actions: [
-              IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.settings)),
-            ],
-          ),
+          appBar: pizzaBar.appBar(context),
           drawer: navDrawer(context),
           body: Container(
             decoration: const BoxDecoration(
@@ -34,13 +31,11 @@ class Contacts extends StatelessWidget {
             height: double.infinity,
             padding: EdgeInsets.symmetric(horizontal: 20),
             child: SingleChildScrollView(
-              child: Column(children: const [
+              child: Column(children: [
                 SizedBox(height: 60,),
-                Text("Доставка пиццы",
-                style: TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                ),),
+                Text("Контакты",
+                  style: Theme.of(context).textTheme.headline2,
+                ),
                 SizedBox(height: 60,),
                 Align(
                   alignment: Alignment.topLeft,

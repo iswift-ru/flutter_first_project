@@ -1,13 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_first_project/navigations.dart';
 import 'package:flutter_first_project/contacts.dart';
+import 'package:flutter_first_project/settings.dart';
+import 'package:flutter_first_project/themes/global_theme.dart';
 
-class Autch extends StatelessWidget {
-  const Autch({Key? key}) : super(key: key);
+import 'orders.dart';
 
-  // This widget is the root of your application.
+class PizzaThemeApp extends StatelessWidget {
+  const PizzaThemeApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: globalTheme(),
+      // home: PizzaTheme(),
+      // home: const MainScreen(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const PizzaTheme(),
+        '/orders': (context) => const Orders(),
+        '/contacts': (context) => const Contacts(),
+        '/settings': (context) => const Settings(),
+      },
+    );
+  }
+}
+
+
+class PizzaTheme extends StatefulWidget {
+  const PizzaTheme({Key? key}) : super(key: key);
+
+  @override
+  _PizzaThemeState createState() => _PizzaThemeState();
+}
+
+class _PizzaThemeState extends State<PizzaTheme> {
+  @override
+  Widget build(BuildContext context) {
+
     const borderStyle = OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(36)),
         borderSide: BorderSide(
@@ -23,21 +53,12 @@ class Autch extends StatelessWidget {
     final ButtonStyle buttonStyle =
     TextButton.styleFrom(primary: Theme.of(context).colorScheme.onPrimary);
 
+    var pizzaBar = PizzaAppBar();
 
     return MaterialApp(
+      theme: globalTheme(),
       home: Scaffold(
-          appBar: AppBar(
-            title: Text("Пицца"),
-            actions: [
-              TextButton(
-                onPressed: () {},
-                child: Text("Контакты"),
-                style: buttonStyle,),
-              IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.settings)),
-            ],
-          ),
+          appBar: pizzaBar.appBar(context),
           drawer: navDrawer(context),
           body: Container(
             decoration: const BoxDecoration(
@@ -86,7 +107,7 @@ class Autch extends StatelessWidget {
                 ElevatedButton(onPressed: () {},
                   child: Text('Войти'),
                   style: ElevatedButton.styleFrom(
-                      primary: Color(0xFF0079D0),
+                      primary: Theme.of(context).colorScheme.primary,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadiusDirectional.circular(36.0),
                       )
@@ -94,9 +115,9 @@ class Autch extends StatelessWidget {
                 )
                 ),
                 SizedBox(height: 62,),
-                InkWell(child: const Text('Регистрация', style: linkTextStyle,), onTap: () {},),
+                InkWell(child: Text('Регистрация', style: Theme.of(context).textTheme.bodyText2,), onTap: () {},),
                 SizedBox(height: 20,),
-                InkWell(child: const Text('Забыли пароль', style: linkTextStyle,), onTap: () {},),
+                InkWell(child: Text('Забыли пароль', style: Theme.of(context).textTheme.bodyText2,), onTap: () {},),
               ],
               ),
             ),
